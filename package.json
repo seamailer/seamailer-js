@@ -1,6 +1,6 @@
 {
   "name": "@seamailer/seamailer-js",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": "Seamailer Team",
   "license": "MIT",
   "description": "Seamailer's Browser SDK",
@@ -27,7 +27,7 @@
     "prettier": "3.3.3",
     "typescript": "^5.6.3"
   },
-  "private": true,
+  "private": false,
   "contributors": [
     "Lekan Oladee <lekan@seamailer.app> (https://github.com/culjo)"
   ],

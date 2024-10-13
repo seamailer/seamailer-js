@@ -1,9 +1,9 @@
-import Seamailer, { ContactCreateAttributes } from "seamailer-js"
+import Seamailer from "seamailer-js";
 
 const seamailer = new Seamailer(
-  "sm_test_epzq3relf",
-  "https://api.dev.seamailer.app"
-)
+    "sm_test_epzq3relf",
+    "https://api.dev.seamailer.app",
+);
 
 function createSampleContact() {
     const param = {
@@ -13,11 +13,11 @@ function createSampleContact() {
         company: "Acme Inc.",
         tags: "tag1, tag2",
         customFields: {
-          "field1": "value1",
-          "field2": "value2"
-        }
-    }
-  seamailer.contacts.createContact(param).then();
+            field1: "value1",
+            field2: "value2",
+        },
+    };
+    seamailer.contacts.createContact(param).then();
 }
 
 // createSampleContact()
