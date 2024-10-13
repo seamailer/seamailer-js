@@ -1,6 +1,6 @@
 import { SeaConfig } from "../types/sea.types";
 
-type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+type RequestMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 
 interface RequestOptions<T> {
     method?: RequestMethod;
@@ -16,36 +16,39 @@ export class ApiClient {
         url: string,
         options: RequestOptions<TBody> = {},
     ): Promise<TResponse> {
-        return this.fetch(url, { ...options, method: "POST" })
+        return this.fetch(url, { ...options, method: "POST" });
     }
 
     async patch<TResponse, TBody = undefined>(
         url: string,
         options: RequestOptions<TBody> = {},
     ): Promise<TResponse> {
-        return this.fetch(url, { ...options, method: "PATCH" })
+        return this.fetch(url, { ...options, method: "PATCH" });
     }
 
     async get<TResponse, TBody = undefined>(
         url: string,
         options: RequestOptions<TBody> = {},
     ): Promise<TResponse> {
-        return this.fetch(url, { ...options, method: "GET" })
+        return this.fetch(url, { ...options, method: "GET" });
     }
 
     async fetch<TResponse, TBody = undefined>(
         url: string,
         options: RequestOptions<TBody> = {},
     ): Promise<TResponse> {
-        const { method = 'GET', headers = {}, body, queryParams } = options;
+        const { method = "GET", headers = {}, body, queryParams } = options;
 
         // Construct query parameters if provided
         const queryString = queryParams
-            ? '?' +
-            new URLSearchParams(
-                Object.entries(queryParams).map(([key, value]) => [key, String(value)])
-            ).toString()
-            : '';
+            ? "?" +
+              new URLSearchParams(
+                  Object.entries(queryParams).map(([key, value]) => [
+                      key,
+                      String(value),
+                  ]),
+              ).toString()
+            : "";
 
         const fullUrl = `${this.seaConfig.baseUrl}${url}${queryString}`;
 
@@ -53,8 +56,8 @@ export class ApiClient {
             method,
             headers: {
                 ...headers,
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.seaConfig.apiKey}`,
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${this.seaConfig.apiKey}`,
             },
             body: body ? JSON.stringify(body) : undefined,
         };
@@ -65,7 +68,7 @@ export class ApiClient {
             if (!response.ok) {
                 const errorBody = await response.text();
                 throw new Error(
-                    `HTTP error! status: ${response.status}, body: ${errorBody}`
+                    `HTTP error! status: ${response.status}, body: ${errorBody}`,
                 );
             }
             // Attempt to parse JSON response if available
@@ -76,4 +79,3 @@ export class ApiClient {
         }
     }
 }
-
